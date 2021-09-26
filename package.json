@@ -8,7 +8,7 @@
     "format": "prettier --write .",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
-    "test-all": "yarn lint && yarn type-check && yarn test"
+    "test:all": "yarn lint && yarn type-check && yarn test"
   },
   "husky": {
     "hooks": {
@@ -24,8 +24,11 @@
   },
   "dependencies": {
     "next": "latest",
+    "next-compose-plugins": "^2.2.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "tslib": "^2.3.1",
+    "typescript-is": "^0.18.3"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
@@ -57,6 +60,7 @@
     "postcss": "^8.3.8",
     "prettier": "^2.0.2",
     "tailwindcss": "^2.2.16",
+    "ts-loader": "^9.2.6",
     "typescript": "^4.1.3"
   }
 }
