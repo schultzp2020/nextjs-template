@@ -1,5 +1,12 @@
-node_modules
+
+.github
 .next
-yarn.lock
-package-lock.json
-public
+node_modules
+out
+
+next-env.d.ts
+
+/public/*.js
+/public/*.js.map
+
+/public/images
