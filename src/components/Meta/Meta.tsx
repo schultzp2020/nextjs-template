@@ -6,11 +6,7 @@ export interface MetaProps {
   description?: string;
 }
 
-export const Meta: React.FC<MetaProps> = ({
-  title,
-  keywords,
-  description
-}: MetaProps): React.ReactElement => (
+export const Meta: React.FC<MetaProps> = ({ title, keywords, description }: MetaProps) => (
   <Head>
     <title>{title}</title>
     <meta name="keywords" content={keywords} />
@@ -30,7 +26,7 @@ export const Meta: React.FC<MetaProps> = ({
 Meta.displayName = 'Meta';
 
 Meta.defaultProps = {
-  title: 'Programming Assessment',
-  keywords: 'Programming Assessment',
-  description: 'Programming Assessment for CS-358'
+  title: 'Nextjs Template',
+  keywords: 'Nextjs Template',
+  description: 'Nextjs Template',
 };

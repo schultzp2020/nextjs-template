@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@src/*": ["src/*"],
-      "@public/*": ["public/*"]
+      "@public/*": ["public/*"],
+      "@pages/*": ["pages/*"]
     },
     "allowJs": false,
     "target": "es5",
@@ -21,7 +22,8 @@
     "noImplicitAny": true,
     "typeRoots": ["src/@types", "node_modules/@types"],
     "types": ["node"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "incremental": true
   },
   "include": ["next-env.d.ts", "**.*.js", "**.*.jsx", "**/*.ts", "**/*.tsx", "**/*.json"],
   "exclude": [

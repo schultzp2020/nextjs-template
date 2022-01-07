@@ -1,14 +1,16 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier", "patternfly-react"],
+  "plugins": ["eslint-comments", "jest", "promise", "unicorn"],
   "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:eslint-comments/recommended",
+    "plugin:jest/recommended",
+    "plugin:promise/recommended",
+    "plugin:unicorn/recommended",
+    "prettier",
     "next"
   ],
   "env": {
-    "es2021": true,
     "browser": true,
     "jest": true,
     "node": true
@@ -18,7 +20,18 @@
       "version": "detect"
     }
   },
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 13,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "rules": {
+    // React is already in-scope for all files compiled with Next.js
+    "react/react-in-jsx-scope": "off",
+    // SSR does not support useLayoutEffect
     "no-restricted-imports": [
       "error",
       {
@@ -27,86 +40,73 @@
         "message": "`useLayoutEffect` causes a warning in SSR. Use `useEffect`"
       }
     ],
-    "@typescript-eslint/no-unsafe-member-access": [0],
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/adjacent-overload-signatures": "error",
-    "@typescript-eslint/array-type": "error",
-    "@typescript-eslint/ban-types": "error",
-    "@typescript-eslint/consistent-type-assertions": "error",
-    "@typescript-eslint/consistent-type-definitions": "error",
-    "@typescript-eslint/explicit-member-accessibility": "error",
-    "@typescript-eslint/explicit-module-boundary-types": "error",
-    "@typescript-eslint/indent": "off",
-    "@typescript-eslint/no-empty-function": "error",
-    "@typescript-eslint/no-empty-interface": "error",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-inferrable-types": "error",
-    "@typescript-eslint/no-misused-new": "error",
-    "@typescript-eslint/no-namespace": "error",
+    // Allows variables starting with _ to be ignored if not used
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
         "argsIgnorePattern": "^_"
       }
     ],
-    "@typescript-eslint/no-use-before-define": "off",
-    "@typescript-eslint/no-var-requires": "error",
-    "@typescript-eslint/prefer-for-of": "error",
-    "@typescript-eslint/prefer-function-type": "error",
-    "@typescript-eslint/prefer-namespace-keyword": "error",
-    "@typescript-eslint/unified-signatures": "error",
-    "@typescript-eslint/explicit-function-return-type": "error",
-    "quotes": ["error", "single"],
-    "arrow-body-style": "error",
+    // Enforces camelcase
     "camelcase": [
       "error",
       {
         "ignoreDestructuring": true
       }
     ],
-    "constructor-super": "error",
-    "curly": "error",
-    "dot-notation": "error",
-    "eqeqeq": ["error", "smart"],
-    "guard-for-in": "error",
-    "max-classes-per-file": ["error", 1],
-    "max-len": "off",
-    "no-nested-ternary": "error",
-    "no-bitwise": "error",
-    "no-caller": "error",
-    "no-cond-assign": "error",
-    "no-console": "error",
-    "no-debugger": "error",
-    "no-empty": "error",
-    "no-eval": "error",
-    "no-new-wrappers": "error",
-    "no-prototype-builtins": "error",
-    "no-shadow": "off",
-    "no-throw-literal": "error",
-    "no-trailing-spaces": "off",
-    "no-undef-init": "error",
-    "no-unsafe-finally": "error",
-    "no-unused-expressions": [
-      "error",
-      {
-        "allowTernary": true,
-        "allowShortCircuit": true
+    // Too restrictive, writing ugly code to defend against a very unlikely scenario: https://eslint.org/docs/rules/no-prototype-builtins
+    "no-prototype-builtins": "off",
+    // https://basarat.gitbooks.io/typescript/docs/tips/defaultIsBad.html
+    "import/prefer-default-export": "off",
+    // Too restrictive: https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/destructuring-assignment.md
+    "react/destructuring-assignment": "off",
+    // No jsx extension: https://github.com/facebook/create-react-app/issues/87#issuecomment-234627904
+    "react/jsx-filename-extension": "off",
+    // Allow only arrow function based components
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    // Common practice in React
+    "react/jsx-props-no-spreading": "off",
+    // Use function hoisting to improve code readability
+    "no-use-before-define": ["error", { "functions": false, "classes": true, "variables": true }],
+    // Common abbreviations are known and readable
+    "unicorn/prevent-abbreviations": "off",
+    // Airbnb prefers forEach
+    "unicorn/no-array-for-each": "off",
+    // React prefers capitalized file names for components
+    "unicorn/filename-case": "off",
+    // It's not accurate in the monorepo style
+    "import/no-extraneous-dependencies": "off",
+    // Import for import of components
+    "import/no-cycle": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.js"],
+      "rules": {
+        // Allow CJS until ESM support improves
+        "@typescript-eslint/no-var-requires": "off",
+        "unicorn/prefer-module": "off"
       }
-    ],
-    "no-unused-labels": "error",
-    "no-var": "error",
-    "object-shorthand": "error",
-    "one-var": ["error", "never"],
-    "patternfly-react/import-tokens-icons": "error",
-    "patternfly-react/no-anonymous-functions": "error",
-    "prefer-const": "error",
-    "prettier/prettier": "error",
-    "radix": ["error", "as-needed"],
-    "react/prop-types": 0,
-    "react/display-name": 0,
-    "react/no-unescaped-entities": ["error", { "forbid": [">", "}"] }],
-    "spaced-comment": "error",
-    "use-isnan": "error"
-  }
+    },
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "plugins": ["@typescript-eslint"],
+      "extends": [
+        "airbnb-typescript",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "rules": {
+        // It's not accurate in the monorepo style
+        "import/no-extraneous-dependencies": "off",
+        // Allow most functions to rely on type inference. If the function is exported, then `@typescript-eslint/explicit-module-boundary-types` will ensure it's typed.
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-use-before-define": [
+          "error",
+          { "functions": false, "classes": true, "variables": true, "typedefs": true }
+        ]
+      }
+    }
+  ]
 }
