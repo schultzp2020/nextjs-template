@@ -40,13 +40,8 @@
         "message": "`useLayoutEffect` causes a warning in SSR. Use `useEffect`"
       }
     ],
-    // Allows variables starting with _ to be ignored if not used
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "^_"
-      }
-    ],
+    // Enables for of and for in loops since airbnb does not allow them
+    "no-restricted-syntax": "off",
     // Enforces camelcase
     "camelcase": [
       "error",
@@ -84,7 +79,6 @@
       "files": ["**/*.js"],
       "rules": {
         // Allow CJS until ESM support improves
-        "@typescript-eslint/no-var-requires": "off",
         "unicorn/prefer-module": "off"
       }
     },
@@ -100,12 +94,30 @@
       "rules": {
         // It's not accurate in the monorepo style
         "import/no-extraneous-dependencies": "off",
-        // Allow most functions to rely on type inference. If the function is exported, then `@typescript-eslint/explicit-module-boundary-types` will ensure it's typed.
-        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-function-return-type": "error",
         "@typescript-eslint/no-use-before-define": [
           "error",
           { "functions": false, "classes": true, "variables": true, "typedefs": true }
-        ]
+        ],
+        // Allows variables starting with _ to be ignored if not used
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        // Disallows function overloading
+        "@typescript-eslint/unified-signatures": "error",
+        // Requires function return types
+        "@typescript-eslint/prefer-function-type": "error",
+        // Requires classes to make member access explicit
+        "@typescript-eslint/explicit-member-accessibility": "error",
+        // Requires the use of interface over type when possible
+        "@typescript-eslint/consistent-type-definitions": "error",
+        // Requires consistent type casting
+        "@typescript-eslint/consistent-type-assertions": "error",
+        // Requires the T[] type syntax for an array
+        "@typescript-eslint/array-type": "error"
       }
     }
   ]

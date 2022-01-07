@@ -1,21 +1,14 @@
-// eslint-disable-next-line @next/next/no-document-import-in-page
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { Html, Head, Main, NextScript } from 'next/document';
+import { NextPage } from 'next';
 
-/**
- * Renders the {@link MyDocument}
- */
-class MyDocument extends Document {
-  public render(): React.ReactElement {
-    return (
-      <Html lang="en-US">
-        <Head />
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
-}
+const MyDocument: NextPage = () => (
+  <Html lang="en-US">
+    <Head />
+    <body>
+      <Main />
+      <NextScript />
+    </body>
+  </Html>
+);
 
 export default MyDocument;

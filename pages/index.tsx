@@ -1,4 +1,6 @@
-export const Home = (): JSX.Element => (
+import type { NextPage } from 'next';
+
+export const Home: NextPage = () => (
   <div>
     <p>Hello World!</p>
   </div>
