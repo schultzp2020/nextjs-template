@@ -12,7 +12,7 @@ export const Meta: React.FC<MetaProps> = ({ title, keywords, description }: Meta
     <meta name="keywords" content={keywords} />
     <meta name="description" content={description} />
 
-    <meta charSet="utf-8" />
+    <meta charSet="utf8" />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
     <meta
       name="viewport"
