@@ -1,15 +1,16 @@
-import { Meta } from '@src/components';
+import { Meta, VersionSelector } from '@src/components';
 
 export interface LayoutProps {
   children: React.ReactNode;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => (
-  <div>
+export function Layout({ children }: LayoutProps): JSX.Element {
+  return (
     <div>
       <Meta />
+      <VersionSelector />
       {children}
     </div>
-  </div>
-);
+  );
+}
 Layout.displayName = 'Layout';

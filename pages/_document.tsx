@@ -1,14 +1,15 @@
 import { Html, Head, Main, NextScript } from 'next/document';
-import { NextPage } from 'next';
 
-const MyDocument: NextPage = () => (
-  <Html lang="en-US">
-    <Head />
-    <body>
-      <Main />
-      <NextScript />
-    </body>
-  </Html>
-);
+function MyDocument(): JSX.Element {
+  return (
+    <Html lang="en-US">
+      <Head />
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}
 
 export default MyDocument;
