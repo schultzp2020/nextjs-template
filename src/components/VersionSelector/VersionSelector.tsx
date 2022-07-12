@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Listbox } from '@headlessui/react';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -11,6 +11,10 @@ export function VersionSelector(): JSX.Element | null {
   const [selectedVersion, setSelectedVersion] = useState<string>(
     possibleVersions.find((version) => router.asPath.includes(version)) ?? '2.2.0',
   );
+
+  const onClick = useCallback((version: string): void => {
+    console.log(version);
+  }, []);
 
   return (
     <Listbox as="div" value={selectedVersion} onChange={setSelectedVersion}>
@@ -38,6 +42,12 @@ export function VersionSelector(): JSX.Element | null {
             <Link href={`/docs/${version}`} className="ml-1">
               {version}
             </Link>
+            {/* <a href={`/docs/${version}`} className="ml-1">
+              {version}
+            </a> */}
+            {/* <button type="button" onClick={(): void => onClick(version)} className="ml-1">
+              {version}
+            </button> */}
           </Listbox.Option>
         ))}
       </Listbox.Options>

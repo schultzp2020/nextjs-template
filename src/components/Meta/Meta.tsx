@@ -20,8 +20,6 @@ export function Meta({ title, keywords, description }: MetaProps): JSX.Element {
         content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
       />
       <meta name="theme-color" content="#151515" />
-
-      <link rel="icon" href="/images/icons/favicon.ico" />
     </Head>
   );
 }
