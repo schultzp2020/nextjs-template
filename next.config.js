@@ -16,4 +16,7 @@ module.exports = withPlugins([], {
     return config;
   },
   swcMinify: true,
+  experimental: {
+    newNextLinkBehavior: true,
+  },
 });
